@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block main_content %}
+  <main class="mb-5">
+    <div class="container px-5 px-lg-7">
+      <div class="row gx-5 gx-lg-7 justify-content-center">
+        <div class="col-md-10 col-lg-9 col-xl-8">
+          <div class="my-lg-5 bg-light">
+            <table class="table table-bordered">
+              <thead class="thead-dark">
+              <tr>
+                <th>Page Title</th>
+                <th>Page URL</th>
+                <th>Number of visits</th>
+                <th>Uploaded data</th>
+                <th>Downloaded data</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for page in stats %}
+                <tr>
+                  <td>{{ page.title }}</td>
+                  <td>{{ page.original_url }}</td>
+                  <td>{{ page.redirect_count }}</td>
+                  <td>{{ page.total_uploaded_data }}</td>
+                  <td>{{ page.total_downloaded_data }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

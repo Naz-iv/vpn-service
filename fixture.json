@@ -336,22 +336,6 @@
     }
   },
   {
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-      "app_label": "vpn_service",
-      "model": "redirection"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-      "app_label": "vpn_service",
-      "model": "page"
-    }
-  },
-  {
     "model": "sessions.session",
     "pk": "fux8hiz4vhlu22xinm2p2wydmvz41r8l",
     "fields": {

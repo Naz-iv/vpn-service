@@ -29,10 +29,10 @@
 {% endblock %}
 
 {% block main_content %}
-  <main class="mb-4">
-    <div class="container px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
+  <main class="mb-5">
+    <div class="container px-5 px-lg-7">
+      <div class="row gx-5 gx-lg-7 justify-content-center">
+        <div class="col-md-10 col-lg-9 col-xl-8">
           <div class="my-5 d-flex justify-content-end">
             <a href="{% url 'vpn-service:page-create' %}">
               <button class="btn btn-primary text-uppercase" id="submitButton" type="button">Add Page</button>
@@ -43,10 +43,14 @@
               <span class="subheading">Available pages for VPN service!</span>
               {% for page in pages %}
                 <p class="post-meta" style="background-color: #f8f9fa">
-                  <strong>Title:</strong> {{ page.title|capfirst }} | <strong>URL:</strong> {{ page.url }}
-                  <a href="{% url 'vpn-service:open' %}">
-                    <button style="float: right; background: none; border: none">Open with VPN</button>
+                  <strong>Title:</strong> {{ page.title|capfirst }} | <strong>URL:</strong> {{ page.original_url }}
+                  <a href="{% url 'vpn-service:page-delete' pk=page.id %}">
+                    <button class="btn-delete">DELETE</button>
                   </a>
+                  <a href="{% url 'vpn-service:vpn-open-base' origin=page.title %}">
+                    <button class="btn-open">OPEN</button>
+                  </a>
+
                 </p>
               {% endfor %}
             {% else %}

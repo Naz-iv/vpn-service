@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginForm, UserUpdateForm
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from vpn_service.models import Page
+from django.db.models import Count, Sum
 
 
 def signup(request: HttpRequest) -> HttpResponse:
@@ -65,3 +67,22 @@ class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
         user_id = self.request.user.id
         return reverse_lazy("user:profile", kwargs={"pk": user_id})
 
+
+class UserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = get_user_model()
+    template_name = "user/stats.html"
+
+    def get_context_data(self, **kwargs):
+        contex = super().get_context_data()
+        user = self.request.user
+        contex["stats"] = (Page.objects.filter(
+            user=user,
+        ).prefetch_related(
+            "redirections"
+        ).annotate(
+            redirect_count=Count("redirections__id"),
+            total_uploaded_data=Sum("redirections__uploaded_data"),
+            total_downloaded_data=Sum("redirections__downloaded_data")
+        )).order_by("title")
+
+        return contex

@@ -8,7 +8,7 @@ class PageForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter page title..."}),
         required=True,
     )
-    url = forms.CharField(
+    original_url = forms.CharField(
         label="Page url",
         widget=forms.URLInput(attrs={"class": "form-control", "placeholder": "Enter page url..."}),
         required=True,
@@ -16,4 +16,4 @@ class PageForm(forms.ModelForm):
 
     class Meta:
         model = Page
-        fields = ["title", "url"]
+        fields = ["title", "original_url"]
